@@ -12,9 +12,9 @@ flange_height = 2;
 flange_width = 2;
 
 // espacement pour l'insertion du roulement irl
+// (ajouté au diamètre intérieur du cadre)
 gutter = 0.1;
 
-// rayon intérieur (surfaces d'accroche)
 // dimensions du roulement
 bearing_diameter = 22;
 bearing_height = 7;
