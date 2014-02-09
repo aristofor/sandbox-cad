@@ -7,8 +7,6 @@ $fn = 96;
 
 // grip intérieur : nombre de dents
 nb_tooth = 30;
-// espacement pour l'assemblage
-gutter = 0.1;
 
 // rayon intérieur (accroches)
 bearing_radius = 11;
@@ -23,16 +21,17 @@ bearing_height = 7;
 module mount_claw(radius=3,ssize=3,height=1) {
 	intersection() {
 		hull() {
-			translate([sol_size,0,0])
+			translate([ssize,0,0])
 				cylinder(r=ssize/2,h=ssize);
-			cylinder(r1=ssize,r2=ssize*0.75,h=ssize);
+			cylinder(r1=radius,r2=ssize*0.75,h=ssize);
 		}
 		cylinder(r1=radius*1.1,r2=radius,h=height);
 	}
 }
 
-module mount_unit(ssize,plate_thickness=3) {
-	d = 11;
+module mount_unit(ssize=3,plate_thickness=3,gutter=0.1) {
+	// guter = stud overhead
+	d = 11; // stud x
 	translate([0,0,0])
 		hull() {
 			translate([-1,-d/2,0])
@@ -41,10 +40,10 @@ module mount_unit(ssize,plate_thickness=3) {
 				cylinder(r=3,h=ssize);
 		}
 	translate([d*2,0,0])
-		cylinder(r=3,h=ssize+plate_thickness);
-	translate([d*2,0,ssize+plate_thickness])
+		cylinder(r=3,h=ssize+plate_thickness+gutter);
+	translate([d*2,0,ssize+plate_thickness+gutter])
 		rotate([0,0,180])
-		mount_claw();
+		mount_claw(radius=3,ssize=ssize);
 }
 
 module mounts(radius_out,ssize=3,plate_thickness=3) {
@@ -67,8 +66,7 @@ module side_bracket(ssize=3) {
 // tests
 //ssize = 2.6;
 //mount_claw();
-//mount_unit(ssize);
+//mount_unit(ssize=ssize);
 //mounts(bearing_radius+ssize,ssize=ssize);
 //bb608_mount_outer(ssize=ssize,flange_height=ssize/2);
-//side_bracket(ssize);
 
