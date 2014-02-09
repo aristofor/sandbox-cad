@@ -1,4 +1,4 @@
-// claw_bracket.scad
+// side_bracket.scad
 // 2014-02-08 Aristofor K
 
 include <bb608_mount_outer.scad>
